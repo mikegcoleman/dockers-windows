@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true,ValueFromRemainingArguments=$true, Position=0)]
-    [String[]] 
+    [String[]]
     $action
 )
 
@@ -31,8 +31,7 @@ ValidateEnvironmentVariable('TF_VAR_region')
 ValidateEnvironmentVariable('TF_VAR_image_vhd_uri')
 
 if ($global:proceed -eq $True) {
-    .\Generate-Credentials.ps1
-    & c:\terraform\terraform.exe $action -var-file='c:\in\passwords.tfvars' -var-file='c:\in\usernames.tfvars'
+    c:\terraform\terraform.exe $action -var-file='c:\in\passwords.tfvars' -var-file='c:\in\usernames.tfvars'
 }
 else {
     Write-Host "Required environment variables missing. Not proceeding with action: $action"
